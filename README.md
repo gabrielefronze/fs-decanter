@@ -1,2 +1,2 @@
-# sshfs-decanter
-A daemon for transferring data to sshfs only if the endpoint is connected or at its reconnection
+# FS-decanter
+A daemon for transferring data to a network filesystem only if the endpoint is connected or at its reconnection.
