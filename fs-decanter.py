@@ -62,17 +62,11 @@ if __name__ == "__main__":
 
   args = parser.parse_args()
   
-  if args.buffer_path:
-    if not os.path.exists(args.buffer_path):
-      raise Exception("Buffer path not found. Aborting.")
-  else:
-    raise Exception("Buffer path not specified. Aborting.")
+  if not os.path.exists(args.buffer_path):
+    raise Exception("Buffer path not found. Aborting.")
 
-  if args.dest_mount_path:
-    if not os.path.exists(args.dest_mount_path):
-      raise Exception("Local mountpoint not found. Aborting.")
-  else:
-    raise Exception("Local mountpoint not specified. Aborting.")
+  if not os.path.exists(args.dest_mount_path):
+    raise Exception("Local mountpoint not found. Aborting.")
 
   if args.auto:
     if not remount_if_fstab(args.dest_mount_path):
