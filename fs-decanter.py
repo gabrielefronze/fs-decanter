@@ -25,6 +25,8 @@ def decant(source_path: str, dest_path: str) -> bool:
     full_file_name = os.path.join(source_path, file_name)
     dest_file_name = os.path.join(dest_path, file_name)
 
+    print("\tCopying from {} to {}".format(full_file_name, dest_file_name))
+
     check_call(['cp', '-r', full_file_name, dest_file_name])
 
     if os.path.exists(dest_file_name):
