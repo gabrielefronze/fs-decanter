@@ -13,7 +13,7 @@ def is_mounted(mount_point: str) -> bool:
 
 def remount_if_fstab(mount_point: str) -> bool:
 
-  check_call(['mount', expanduser(mount_point)])
+  check_call(['mount', '--all'])
 
   return is_mounted(mount_point)
 
@@ -75,7 +75,9 @@ if __name__ == "__main__":
     raise Exception("Local mountpoint not found. Aborting.")
 
   if args.auto:
-    if not remount_if_fstab(args.dest_mount_path):
-      raise Exception("Unable to mount. Aborting.")
+    if not is_mounted(args.dest_mount_path):
+      print("Remounting local endpoint.")
+      if not remount_if_fstab(args.dest_mount_path):
+        raise Exception("Unable to mount. Aborting.")
 
   run_decanter(buffer_path=args.buffer_path, mount_path=args.dest_mount_path)
