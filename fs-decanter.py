@@ -27,10 +27,16 @@ def decant(source_path: str, dest_path: str) -> bool:
 
     if os.path.isdir(full_file_name):
       print("\tCopying full directory: {}".format(full_file_name))
-      copy_tree(full_file_name, dest_file_name)
+      if os.path.exists(dest_file_name):
+        raise Exception("Destination file exists! Aborting.")
+      else:
+        copy_tree(full_file_name, dest_file_name)
     else:
       print("\tCopying file: {}".format(full_file_name))
-      shutil.copy(full_file_name, dest_file_name)
+      if os.path.exists(dest_file_name):
+        raise Exception("Destination directory exists! Aborting.")
+      else:
+        shutil.copy(full_file_name, dest_file_name)
 
     if os.path.exists(dest_file_name):
       if os.path.isdir(dest_file_name):
